@@ -11,7 +11,7 @@ The main mechanism for this is
 
 SavedIdea contains id and some metadata that NewIdea doesn't have. SavedIdea can be edited but NewIdea can't. etc.
 
-As a result I spent too long on that part and not enough time on other bits. There's also some scrappy code here and there that needs tidying. As I'm away Wednesday, Thursday, Friday this week, and have some more interviews and tech tasks, I'm going to submit now and adjust/add this evening. Hope that's ok!
+I probably spent too long on that part and not enough time on other bits. There's also some scrappy code here and there that needs tidying. As I'm away Wednesday, Thursday, Friday this week, and have some more interviews and tech tasks, I'm going to submit now and adjust/add this evening. Hope that's ok!
 
 ## TODO
 
