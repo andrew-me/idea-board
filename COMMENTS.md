@@ -27,3 +27,4 @@ I probably spent too long on that part and not enough time on other bits. There'
 - 140 character max length
 - Nicer styling
 - Make it look like we're not using form fields
+- Block any actions that might break things while loading

@@ -30,14 +30,6 @@ const Ideas = () => {
       return () => { ignore = true; }
     }, [order]);
 
-    if (loading) {
-        return <div>Loading</div>;
-    }
-
-    if (!ideas.length) {
-        return <div>No results</div>;
-    }
-
     async function handleSave(idea: Idea, content: IdeaContent) {
         switch(idea.tag) {
             case 'newIdea':
@@ -95,6 +87,10 @@ const Ideas = () => {
                     return <li className="ideas__list-item" key={idea.getId()}><IdeaComponent idea={idea} onSave={handleSave} onCancel={handleCancel} onDelete={handleDelete} /></li>
                 })}
             </ul>
+            <div>
+                {loading && <div>Loading</div>}
+                {(!loading && !ideas.length && !showAddIdea) && <div>No results</div>}
+            </div>
         </>
     );
 }
