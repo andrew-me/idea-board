@@ -79,12 +79,8 @@ class IdeaComponent extends React.Component<Props, State> {
                         />
                     </div>
                     <div><TextArea placeholder='Description' label="Description" value={this.state.description} onChange={this.handleDescriptionChange} /></div>
-                    {this.isChanged() && (
-                        <>
-                            <button onClick={this.handleSave}>Save</button>
-                            <button onClick={this.handleCancel}>Cancel</button>
-                        </>
-                    ) }
+                    {this.isChanged() && <button onClick={this.handleSave}>Save</button> }
+                    {(this.props.idea.tag === 'newIdea' || this.isChanged()) && <button onClick={this.handleCancel}>Cancel</button> }
                     {this.props.onDelete && <button onClick={this.handleDelete}>Delete</button>}
                 </form>
             </div>
