@@ -128,7 +128,7 @@ export const createIdea = (content: IdeaContent, dataConfig: DataConfig) =>
     delay(500).then(() => {
         const index = findIndex(fakeDatabase.ideas, (idea) => idea.id === id)
 
-        if (!index) {
+        if (index === -1) {
             throw Error('Missing Idea');
         }
 
