@@ -5,6 +5,7 @@ import '../css/utility.scss';
 // needs max length. anything else?
 
 type Props = {
+  focus?: boolean,
   placeholder: string,
   label: string,
   value?: string,
@@ -18,12 +19,22 @@ type State = {
 }
 
 export default class extends React.Component<Props, State> {
+  ref: React.RefObject<any>;
+
   constructor(props: Props) {
     super(props);
 
     this.state = {
       value: props.value || '',
       error: false
+    }
+
+    this.ref = React.createRef();
+  }
+
+  componentDidMount() {
+    if(this.props.focus) {
+      this.ref.current.focus();
     }
   }
 
@@ -49,6 +60,7 @@ export default class extends React.Component<Props, State> {
       <label>
         <span className="hidden">{this.props.label}</span>
         <input
+          ref={this.ref}
           placeholder={this.props.placeholder}
           value={this.state.value}
           onChange={this.onChange}
