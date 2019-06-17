@@ -1,0 +1,8 @@
+.order-button {
+    font-size: 12px;
+    cursor: pointer;
+
+    &--active {
+        cursor: default;
+    }
+}

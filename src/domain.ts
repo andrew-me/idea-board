@@ -1,12 +1,9 @@
 import format from 'date-fns/format';
 
-import { createIdea, editIdea, deleteIdea } from './api';
+import { createIdea, editIdea, deleteIdea, DataConfig } from './api';
 
 const TITLE_LENGTH = 140;
 const DESCRIPTION_LENGTH =  140;
-
-// loads missing around error handling, date handling, tests
-// assumptions?
 
 type ValidationResult = ValidationSuccess | ValidationFailure;
 
@@ -83,14 +80,14 @@ abstract class SharedIdea {
 export class NewIdea extends SharedIdea {
     tag: 'newIdea' = 'newIdea';
 
-    async create(content: IdeaContent) {
+    async create(content: IdeaContent, dataConfig: DataConfig) {
         const validation = this.validate(content);
 
         switch(validation.tag) {
             case 'validationFailure':
                 throw new Error(validation.message);
             case 'validationSuccess':
-                return await createIdea(content);
+                return await createIdea(content, dataConfig);
         }
     };
  
@@ -119,19 +116,19 @@ export class SavedIdea extends SharedIdea {
         return format(this.meta.updated, 'Do MMMM');
     }
 
-    async edit(content: IdeaContent) {
+    async edit(content: IdeaContent, dataConfig: DataConfig) {
         const validation = this.validate(content);
 
         switch(validation.tag) {
             case 'validationFailure':
                 throw new Error(validation.message);
             case 'validationSuccess':
-                return await editIdea(this.id, content);
+                return await editIdea(this.id, content, dataConfig);
         }
     };
 
-    async delete(id: string) {
-        return await deleteIdea(this.id);
+    async delete(id: string, dataConfig: DataConfig) {
+        return await deleteIdea(this.id, dataConfig);
     };
 
     constructor(id: string, content: IdeaContent, meta: IdeaMeta) {

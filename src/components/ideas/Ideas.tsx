@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { fetchIdeas } from '../../api';
+import { fetchIdeas, DataConfig, DataOrder } from '../../api';
 import { Idea, NewIdea, SavedIdea, IdeaContent } from '../../domain';
 
 import IdeaComponent from '../idea/IdeaComponent';
+import OrderButton from './OrderButton'
 
 import './ideas.scss';
+import './order-button.scss';
 
 const Ideas = () => {
     const [ideas, setIdeas] = useState<SavedIdea[]>([]);
     const [loading, setLoading] = useState(true);
+    const [order, setOrder] = useState<DataOrder>('created');
     const [showAddIdea, setShowAddIdea] = useState(false);
   
     useEffect(() => {
       let ignore = false;
   
-      async function fetchData() {
-        const result = await fetchIdeas();
+      async function fetchData(dataConfig: DataConfig) {
+        const result = await fetchIdeas(dataConfig);
+
         if (!ignore) {
             setIdeas(result);
             setLoading(false);
         };
       }
   
-      fetchData();
+      fetchData({ order });
       return () => { ignore = true; }
-    });
+    }, [order]);
 
     if (loading) {
         return <div>Loading</div>;
@@ -39,13 +43,13 @@ const Ideas = () => {
             case 'newIdea':
                 setShowAddIdea(false);
                 setLoading(true); // should be on individual idea
-                const createResult = await idea.create(content);
+                const createResult = await idea.create(content, { order });
                 setIdeas(createResult);
                 setLoading(false);
                 break;
             case 'savedIdea':
                 setLoading(true); // should be on individual idea
-                const editResult = await idea.edit(content);
+                const editResult = await idea.edit(content, { order });
                 setIdeas(editResult);
                 setLoading(false);
                 break;
@@ -69,7 +73,7 @@ const Ideas = () => {
                 break;
             case 'savedIdea':
                 setLoading(true); // should be on individual idea
-                const deleteResult = await idea.delete(idea.getId());
+                const deleteResult = await idea.delete(idea.getId(), { order });
                 setIdeas(deleteResult);
                 setLoading(false);
                 break;
@@ -78,7 +82,13 @@ const Ideas = () => {
 
     return (
         <>
-            {!showAddIdea && <button onClick={() => setShowAddIdea(true)}>Add</button>}
+            <div className="ideas__head">
+                <div>
+                    <OrderButton onClick={() => setOrder('alphabetical')} text='Alphabetical' active={order === 'alphabetical'} /> |{` `}
+                    <OrderButton onClick={() => setOrder('created')} text='Created' active={order === 'created'} />
+                </div>
+                {!showAddIdea && <button onClick={() => setShowAddIdea(true)}>Add</button>}
+            </div>
             <ul className="ideas__list">
                 {showAddIdea && <li key="newIdea"><IdeaComponent idea={new NewIdea()} onSave={handleSave} onCancel={handleCancel} /></li>}
                 {ideas.map((idea: SavedIdea) => {

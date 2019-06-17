@@ -27,4 +27,3 @@ As a result I spent too long on that part and not enough time on other bits. The
 - 140 character max length
 - Nicer styling
 - Make it look like we're not using form fields
-- Sort by creation date or alpha
