@@ -67,6 +67,7 @@ class IdeaComponent extends React.Component<Props, State> {
     render() {
         return (
             <div className="idea">
+                {this.props.idea.tag === 'savedIdea' && <p className="idea__date">{this.props.idea.getFormattedDate()}</p>}
                 <form>
                     <div><TextField placeholder='Title' label="Title" value={this.state.title} onChange={this.handleTitleChange} /></div>
                     <div><TextArea placeholder='Description' label="Description" value={this.state.description} onChange={this.handleDescriptionChange} /></div>

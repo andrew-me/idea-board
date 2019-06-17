@@ -1,3 +1,5 @@
+import format from 'date-fns/format';
+
 import { createIdea, editIdea, deleteIdea } from './api';
 
 const TITLE_LENGTH = 140;
@@ -111,6 +113,10 @@ export class SavedIdea extends SharedIdea {
 
     getMeta() {
         return this.meta;
+    }
+
+    getFormattedDate() {
+        return format(this.meta.updated, 'Do MMMM');
     }
 
     async edit(content: IdeaContent) {
