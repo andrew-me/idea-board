@@ -24,7 +24,6 @@ As a result I spent too long on that part and not enough time on other bits. The
 - Form field validation
 - Tests
 - 140 character max length
-- Display created/updated time
 - Nicer styling
 - Make it look like we're not using form fields
 - Focused title field for add
