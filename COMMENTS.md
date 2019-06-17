@@ -18,6 +18,7 @@ As a result I spent too long on that part and not enough time on other bits. The
 - Assumptions in README.md
 - Error handling
 - Loading per idea rather than all ideas
+- Accessibility
 - browser targetting and testing
 - optimistic updates
 - are you sure 'delete'
