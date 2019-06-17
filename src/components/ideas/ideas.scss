@@ -1,0 +1,11 @@
+.ideas__list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    list-style: none;
+}
+
+.ideas__list-item {
+    list-style: none;
+    border: 1px solid red;
+}
