@@ -1,6 +1,6 @@
 # Comments
 
-The task is in TypeScript. If you prefer, and can swap to JavaScript.
+The task is in TypeScript. If you prefer, I can swap to JavaScript.
 
 I've taken the opportunity to try out some recent ideas. Please let me know what you think!
 
@@ -17,7 +17,7 @@ As a result I spent too long on that part and not enough time on other bits. The
 
 - Assumptions in README.md
 - Error handling
-- Loading per idea rather than all ideas
+- Loading per idea rather than all ideas + sort loading when changing order
 - Accessibility
 - browser targeting and testing
 - optimistic updates
