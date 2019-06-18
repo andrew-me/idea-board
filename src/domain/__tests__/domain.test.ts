@@ -57,7 +57,61 @@ describe('domain', () => {
                 await expect(newIdea.create(invalidContentDescriptionOver140, validConfig))
                     .rejects.toMatchObject({ message: 'Description is longer than 140' });
             });
-
         })
+    });
+
+    describe('Saved idea', () => {
+        let savedIdea: any;
+
+        it('should error if instantiated with title over 140 characters', () => {
+            expect(() => { new SavedIdea('1234', invalidContentDescriptionOver140, validMeta) }).toThrow();
+        });
+
+        describe('Valid saved idea', () => {
+            beforeEach(() => {
+                savedIdea = new SavedIdea('1234', validContent, validMeta);
+            });
+
+            it('should have a title', () => {
+                expect(savedIdea.getTitle()).toBe(validContent.title);
+            });
+    
+            it('should have an empty description', () => {
+                expect(savedIdea.getDescription()).toBe(validContent.description);
+            });
+    
+            it('should have an id', () => {
+                expect(savedIdea.getId()).toBe('1234');
+            });
+    
+            it('should have meta', () => {
+                expect(savedIdea.getMeta()).toBe(validMeta);
+            });
+
+            it('should not have create', () => {
+                expect(savedIdea.create).toBe(undefined);
+            });
+
+            describe('edit()', () => {
+                it('should call api.editIdea', async () => {
+                    await savedIdea.edit(validContent, validConfig);
+        
+                    expect(editIdea.mock.calls.length).toBe(1);
+                });
+    
+                it('should error if title is over 140 characters', async () => {
+                    await expect(savedIdea.edit(invalidContentDescriptionOver140, validConfig))
+                        .rejects.toMatchObject({ message: 'Description is longer than 140' });
+                });
+            })
+
+            describe('delete()', () => {
+                it('should call api.deleteIdea', async () => {
+                    await savedIdea.delete('1234', validConfig);
+        
+                    expect(deleteIdea.mock.calls.length).toBe(1);
+                });
+            })
+        });
     });
 });
