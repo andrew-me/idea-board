@@ -1,6 +1,6 @@
 import format from 'date-fns/format';
 
-import { createIdea, editIdea, deleteIdea, DataConfig } from './api';
+import { createIdea, editIdea, deleteIdea, DataConfig } from '../api';
 
 const TITLE_LENGTH = 140;
 const DESCRIPTION_LENGTH =  140;
