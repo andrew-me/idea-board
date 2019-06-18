@@ -3,12 +3,6 @@ import { createIdea, editIdea, deleteIdea, DataConfig } from '../../api';
 
 jest.mock('../../api');
 
-jest.mock('node-uuid', () => {
-    return {
-      v4: jest.fn(() => Math.random())
-    };
-  });
-
 const validContent = { title: 'A title', description: 'A description'};
 const validConfig = { order: 'alphabetical' };
 const descriptionOver140 = 'Duis imperdiet eu diam sit amet faucibus. Sed vel laoreet. Duis imperdiet eu diam sit amet faucibus. Sed vel laoreet. Duis imperdiet eu diam sit amet faucibus. Sed vel laoreet.';
